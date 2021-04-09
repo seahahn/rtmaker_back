@@ -10,6 +10,7 @@
         if(!preg_match($regEmail, $email)) {
             $ret['msg'] = "올바르지 않은 이메일입니다.";
             $ret['result'] = false;
+            $ret['overlap'] = false;
         }
         else if($num!=0){
             $ret['msg'] = "이미 가입된 이메일입니다.";
@@ -18,6 +19,7 @@
         } else {
             $ret['msg'] = "사용 가능한 이메일입니다.";
             $ret['result'] = true;
+            $ret['overlap'] = false;
         }
 
         echo json_encode($ret);
@@ -25,6 +27,7 @@
     } else {
         $ret['msg'] = "이메일을 입력해주세요.";
         $ret['result'] = false;
+        $ret['overlap'] = false;
 
         echo json_encode($ret);
     }
