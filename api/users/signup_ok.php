@@ -18,6 +18,8 @@ $hash = md5( rand(0,1000) ); // 이메일 인증 위한 해쉬값 생성
 // Generate random 32 character hash and assign it to a local variable.
 // Example output: f4552671f8909587cf485ea990207f3b
 
+$response;
+
 if($inway == "etc") {
     $mail = new PHPMailer(true);
     try {
@@ -173,15 +175,12 @@ if($inway == "etc") {
         $response = [
             'status'   => 200,
             'msg' => "회원가입이 완료되었습니다."
-        ];
-        
+        ];        
     } catch (Exception $e) {
-    
         $response = [
             'status'   => 500,
             'msg' => "회원가입 실패 : 서버 오류"
         ];
-
     }
 } else {
     // SNS로 가입한 경우 메일 인증 없이 바로 계정 활성화함
@@ -200,9 +199,7 @@ if($inway == "etc") {
         'status'   => 200,
         'msg' => "회원가입이 완료되었습니다."
     ];
-    
 }
 
 echo json_encode($response);
-
 ?>
