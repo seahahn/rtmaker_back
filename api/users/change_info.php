@@ -19,6 +19,7 @@ if($change) {
         'result'   => true,
         'msg' => "정보 수정되었습니다."
         ];
+    if($subject == "photo") $response['photo'] = $content;
 } else {
     $response = [
         'result'   => false,
