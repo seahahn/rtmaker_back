@@ -75,7 +75,7 @@ try {
 
     // 메일 내용
     $mail -> isHTML(true);                                               // HTML 태그 사용 여부
-    $mail -> Subject = '[루틴메이커] '.$nick.' 님, 이메일을 인증해주세요.';              // 메일 제목
+    $mail -> Subject = '[루틴메이커] '.$nick.' 님, 비밀번호 재설정을 위한 인증번호입니다.';              // 메일 제목
     $mail -> Body = '
     <table class="wrapper" style="border-collapse: collapse;table-layout: fixed;min-width: 320px;width: 100%;background-color: #f8f8f9;" cellpadding="0" cellspacing="0"><tbody><tr><td>
 
