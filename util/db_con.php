@@ -1,6 +1,6 @@
 <?php
     $db_id="root"; // DB 계정명
-    $db_pw=""; // DB 계정 비밀번호
+    $db_pw="0121"; // DB 계정 비밀번호
     $db_name="rtmaker"; // 연결할 데이터베이스명
     $db_domain="127.0.0.1"; // 연결할 도메인
     $db=mysqli_connect($db_domain,$db_id,$db_pw,$db_name);
