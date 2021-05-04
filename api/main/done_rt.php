@@ -9,7 +9,7 @@ $m_date = $_GET['m_date']; // 다음 수행 날짜(루틴이거나 반복하는 
 $done_update = mq("UPDATE rt_todo SET done = '$done' WHERE id='$id'");
 
 // 루틴(할 일) 완료한 경우
-if($done == 1){
+if($done == 1 && $m_date != ""){
     // 완료 처리한 루틴(할 일)의 데이터 가져오기
     $sql = "SELECT * FROM rt_todo WHERE id='$id'";
     $result = mysqli_fetch_assoc(mq($sql));
