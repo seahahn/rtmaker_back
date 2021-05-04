@@ -8,18 +8,19 @@ $m_date = $_GET['m_date']; // 다음 수행 날짜(루틴이거나 반복하는 
 // 루틴(할 일) 처리하기(완료 or 미완료)
 $done_update = mq("UPDATE rt_todo SET done = '$done' WHERE id='$id'");
 
+// 완료 처리한 루틴(할 일)의 데이터 가져오기
+$sql = "SELECT * FROM rt_todo WHERE id='$id'";
+$result = mysqli_fetch_assoc(mq($sql));
+$type = $result['m_type'];
+
 // 루틴(할 일) 완료한 경우
 if($done == 1 && $m_date != ""){
-    // 완료 처리한 루틴(할 일)의 데이터 가져오기
-    $sql = "SELECT * FROM rt_todo WHERE id='$id'";
-    $result = mysqli_fetch_assoc(mq($sql));
-
-    $type = $result['m_type'];
+    
     if($type == "rt") {
         mq("UPDATE rt_todo SET
-        m_date = '$m_date'
-        WHERE id = '$id'
-        ");
+            m_date = '$m_date'
+            WHERE id = '$id'
+            ");
     } else {
         // 완료 처리한 할 일의 다음 수행 날짜 데이터가 있는지 없는지 확인하기
         $check = mq("SELECT * FROM rt_todo WHERE title = '$result[title]' AND m_date = '$m_date'");
@@ -38,6 +39,11 @@ if($done == 1 && $m_date != ""){
         user_id = '$result[user_id]'
         ");
     }
+} else if($done == 0 && $type == "rt") {
+    mq("UPDATE rt_todo SET
+        m_date = '$m_date'
+        WHERE id = '$id'
+        ");
 }
 
 $response;
