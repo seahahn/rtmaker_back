@@ -14,22 +14,30 @@ if($done == 1){
     $sql = "SELECT * FROM rt_todo WHERE id='$id'";
     $result = mysqli_fetch_assoc(mq($sql));
 
-    // 완료 처리한 루틴(할 일)의 다음 수행 날짜 데이터가 있는지 없는지 확인하기
-    $check = mq("SELECT * FROM rt_todo WHERE title = '$result[title]' AND m_date = '$m_date'");
-    $count = mysqli_num_rows($check);
+    $type = $result['m_type'];
+    if($type == "rt") {
+        mq("UPDATE rt_todo SET
+        m_date = '$m_date'
+        WHERE id = '$id'
+        ");
+    } else {
+        // 완료 처리한 할 일의 다음 수행 날짜 데이터가 있는지 없는지 확인하기
+        $check = mq("SELECT * FROM rt_todo WHERE title = '$result[title]' AND m_date = '$m_date'");
+        $count = mysqli_num_rows($check);
 
-    // 루틴(할 일)과 동일한 제목, 그리고 다음 수행 날짜를 가진 데이터가 없으면 다음 수행 루틴(할 일) 추가함
-    if($count == 0) $new_rttodo = mq("INSERT rt_todo SET
-    m_type = '$result[m_type]',
-    title = '$result[title]',
-    m_days = '$result[m_days]',
-    alarm = '$result[alarm]',
-    m_date = '$m_date',
-    m_time = '$result[m_time]',
-    on_feed = '$result[on_feed]',
-    memo = '$result[memo]',
-    user_id = '$result[user_id]'
-    ");
+        // 할 일과 동일한 제목, 그리고 다음 수행 날짜를 가진 데이터가 없으면 다음에 수행할 할 일 추가함
+        if($count == 0) mq("INSERT rt_todo SET
+        m_type = '$result[m_type]',
+        title = '$result[title]',
+        m_days = '$result[m_days]',
+        alarm = '$result[alarm]',
+        m_date = '$m_date',
+        m_time = '$result[m_time]',
+        on_feed = '$result[on_feed]',
+        memo = '$result[memo]',
+        user_id = '$result[user_id]'
+        ");
+    }
 }
 
 $response;
