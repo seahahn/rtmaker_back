@@ -1,7 +1,7 @@
 <?php
 include_once $_SERVER["DOCUMENT_ROOT"]."/util/db_con.php";
 
-$id = $_GET['id'];
+$id = $_POST['id'];
 
 $mq = mq("DELETE FROM rt_todo WHERE id='$id'");
 
