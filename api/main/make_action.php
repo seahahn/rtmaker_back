@@ -7,18 +7,21 @@ $memo = $_POST['memo'];
 $rt_id = $_POST['rt_id'];
 $user_id = $_POST['user_id'];
 
+$sql = mq("SELECT * FROM action WHERE rt_id='$rt_id' AND user_id='$user_id' ORDER BY pos DESC LIMIT 1");
+$result = mysqli_fetch_assoc($sql);
+$num = $result['pos']+1;
+
 // 들어온 값 있을 경우 DB에 사용자 가입 정보 저장
 if(isset($title)) {
-    $test = "dd";
     $mq = mq("INSERT action SET
     title = '$title',
     m_time = '$m_time',
     memo = '$memo',
     rt_id = '$rt_id',
-    user_id = '$user_id'
+    user_id = '$user_id',
+    pos = '$num'
     ");
 } else {
-    $test = "xx";
     $mq = false;
 }
 

@@ -1,9 +1,20 @@
 <?php
+/** 
+ * 메인 액티비티에서 루틴 또는 할 일의 체크박스 클릭 시 작동할 기능
+ * 루틴의 경우 완료 여부(체크를 했느냐 안 했느냐)에 따라 해당 루틴과 이에 속한 행동들의 완료 여부를 변경함
+ * 완료했으면 다음 수행 예정일로 날짜 데이터를 변경하고,
+ * 완료 상태에서 다시 체크박스를 눌러 체크를 해제(미완료)하면 당일 날짜로 다시 되돌림
+ * 
+ * 할 일의 경우 반복하지 않으면 완료 여부만 변경, 
+ * 반복하면 완료 여부 변경과 함께 다음 수행 예정일에 같은 내용을 가진 할 일을 생성함
+*/
 include_once $_SERVER["DOCUMENT_ROOT"]."/util/db_con.php";
+include_once "fun.php";
 
 $id = $_GET['id']; // 루틴(할 일) 고유 번호
 $done = $_GET['done']; // 완료 구분(0이면 미완료, 1이면 완료)
-$m_date = $_GET['m_date']; // 다음 수행 날짜(루틴이거나 반복하는 할 일인 경우)
+$m_date = $_GET['m_date']; // 다음 수행 날짜(루틴이거나 반복하는 할 일인 경우) 또는 당일 날짜
+$done_date = $_GET['done_date']; // 루틴을 수행한 날짜(당일 날짜)
 
 // 루틴(할 일) 처리하기(완료 or 미완료)
 $done_update = mq("UPDATE rt_todo SET done = '$done' WHERE id='$id'");
@@ -15,12 +26,38 @@ $type = $result['m_type'];
 
 // 루틴(할 일) 완료한 경우
 if($done == 1 && $m_date != ""){
-    
     if($type == "rt") {
+        // 루틴의 다음 수행 예정일로 날짜값 바꾸기
         mq("UPDATE rt_todo SET
             m_date = '$m_date'
             WHERE id = '$id'
             ");
+
+        // 루틴 수행 데이터(과거 내역) 추가하기
+        // 루틴 수행 데이터(과거 내역)가 추가되어 있는지 확인 후,
+        // 추가되어 있으면 이 데이터의 완료 여부(done 값)을 1로 변경
+        $check = mq("SELECT * FROM rt_done WHERE rt_id = '$result[id]' AND m_date = '$done_date'");
+        $count = mysqli_num_rows($check);
+        if($count == 0) {
+            mq("INSERT rt_done SET
+            title = '$result[title]',
+            m_days = '$result[m_days]',
+            m_date = '$done_date',
+            m_time = '$result[m_time]',
+            rt_id = '$result[id]',
+            user_id = '$result[user_id]',
+            done = '$done'
+            ");
+        } else {
+            mq("UPDATE rt_done SET
+            done = '$done'
+            WHERE rt_id = '$result[id]' AND m_date = '$done_date'
+            ");
+        }
+
+        // 루틴에 포함된 행동 전체 완료 처리
+        mq("UPDATE action SET done = 1 WHERE rt_id = '$id'");
+        done_actions($id, $done_date, 1);
     } else {
         // 완료 처리한 할 일의 다음 수행 날짜 데이터가 있는지 없는지 확인하기
         $check = mq("SELECT * FROM rt_todo WHERE title = '$result[title]' AND m_date = '$m_date'");
@@ -40,10 +77,24 @@ if($done == 1 && $m_date != ""){
         ");
     }
 } else if($done == 0 && $type == "rt") {
+    // 오늘(루틴을 수행 가능한) 날짜로 루틴의 수행 예정일 되돌려놓기
     mq("UPDATE rt_todo SET
         m_date = '$m_date'
         WHERE id = '$id'
         ");
+
+    // 루틴 수행 데이터(과거 내역)가 추가되어 있는지 확인 후,
+    // 추가되어 있으면 이 데이터의 완료 여부(done 값)을 0으로 변경
+    $check = mq("SELECT * FROM rt_done WHERE rt_id = '$result[id]' AND m_date = '$done_date'");
+    $count = mysqli_num_rows($check);
+    if($count != 0) mq("UPDATE rt_done SET
+    done = '$done'
+    WHERE rt_id = '$result[id]' AND m_date = '$done_date'
+    ");
+
+    // 루틴에 포함된 행동을 미완료 상태로 바꾸기
+    mq("UPDATE action SET done = 0 WHERE rt_id = '$id'");
+    done_actions($id, $done_date, 0);
 }
 
 $response;
