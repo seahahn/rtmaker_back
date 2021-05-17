@@ -8,38 +8,22 @@ include_once "fun_done.php"; // 루틴 및 할 일 완료 처리를 위한 메�
 
 // 오늘 날짜를 통해 오늘의 요일 구하기
 // 이 요일 문자열을 가진 모든 루틴을 찾아오기 위함
+$timezone = 'Asia/Seoul'; // 시간대를 서울로 설정
+date_default_timezone_set($timezone);
 $today = date("Y-m-d", time()); // 오늘 날짜 구하기
 $week_string = array("일", "월", "화", "수", "목", "금", "토");
 $dayoftoday = $week_string[date('w', strtotime($today))]; // 오늘 요일 구하기
 
+// echo $today;
+// echo $dayoftoday;
+
 $sql = "SELECT * FROM rt_todo WHERE m_days LIKE '%$dayoftoday%'"; // 0시 기준 당일의 요일 이름 문자열을 m_days에 포함한 루틴 데이터 불러오기
 $result = mq($sql);
 
-// $array = array(); // 앱에 전달할 JSON 데이터를 담을 array.
-// while($rt = $result->fetch_assoc()) {
-//     $data = [
-//         'id'   => $rt['id'],
-//         'mType' => $rt['m_type'],
-//         'rtTitle'   => $rt['title'],
-//         'mDays' => $rt['m_days'],
-//         'mDate' => $rt['m_date'],
-//         'mTime' => $rt['m_time'],
-//         'alarm'   => $rt['alarm'],
-//         'onFeed'   => $rt['on_feed'],
-//         'memo' => $rt['memo'],
-//         'userId'   => $rt['user_id'],
-//         'done'   => $rt['done'],
-//         'createdAt' => $rt['created_at']
-//     ];
-//     array_push($array, $data);
-// }
-// echo json_encode($array);
-
-// 완료 처리한 루틴(할 일)의 데이터 가져오기
-// $sql = "SELECT * FROM rt_todo WHERE id='$id'";
-// $result = mysqli_fetch_assoc(mq($sql));
-
-done_rt($result['id'], $result['title'], $result['m_days'], $result['m_date'], $result['m_time'], $result['memo'], $result['user_id'], 0);
-done_actions($result['id'], $result['m_date'], 0);
-
+// 불러온 루틴 데이터 각각에 대하여 수행 데이터를 생성함
+while($rt = $result->fetch_assoc()) {
+    mq("UPDATE rt_todo SET m_date = '$today' WHERE id = '$rt[id]'");
+    done_rt($rt['id'], $rt['title'], $rt['m_days'], $today, $rt['m_time'], $rt['memo'], $rt['user_id'], 0);
+    done_actions($rt['id'], $today, 0);
+}
 ?>
