@@ -20,7 +20,7 @@ $result = mq($sql);
 // 불러온 루틴 데이터 각각에 대하여 수행 데이터를 생성함
 while($rt = $result->fetch_assoc()) {
     mq("UPDATE rt_todo SET m_date = '$today' WHERE id = '$rt[id]'");
-    done_rt($rt['id'], $rt['title'], $rt['m_days'], $today, $rt['m_time'], $rt['memo'], $rt['user_id'], 0);
+    done_rt($rt['id'], $rt['title'], $rt['m_days'], $today, $rt['m_time'], $rt['alarm'], $rt['on_feed'], $rt['memo'], $rt['user_id'], 0);
     done_actions($rt['id'], $today, 0);
 }
 ?>

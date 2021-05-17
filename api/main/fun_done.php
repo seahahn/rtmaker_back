@@ -1,5 +1,5 @@
 <?php
-function done_rt($rt_id, $title, $m_days, $m_date, $m_time, $memo, $user_id, $done) {
+function done_rt($rt_id, $title, $m_days, $m_date, $m_time, $alarm, $on_feed, $memo, $user_id, $done) {
     // 루틴 수행 데이터(과거 내역) 추가하기
     // 루틴 수행 데이터(과거 내역)가 추가되어 있는지 확인 후,
     // 추가되어 있으면 이 데이터의 완료 여부(done 값)을 1로 변경
