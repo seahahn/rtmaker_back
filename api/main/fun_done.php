@@ -17,7 +17,7 @@ function done_rt($rt_id, $title, $m_days, $m_date, $m_time, $memo, $user_id, $do
         done = '$done'
         ");
 
-        echo "$insert";
+        if($insert) echo "추가됨";
     } else {
         mq("UPDATE rt_done SET
         done = '$done'
