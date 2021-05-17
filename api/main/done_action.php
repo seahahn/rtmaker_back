@@ -46,7 +46,7 @@ if($all_done){
 
     // 루틴 수행 데이터(과거 내역)가 추가되어 있는지 확인 후,
     // 추가되어 있으면 이 데이터의 완료 여부(done 값)을 1로 변경
-    done_rt($rt_id, $result['title'], $result['m_days'], $m_date, $result['m_time'], $result['memo'], $result['user_id'], $all_done);
+    done_rt($rt_id, $result['title'], $result['m_days'], $m_date, $result['m_time'], $result['alarm'], $result['on_feed'], $result['memo'], $result['user_id'], $all_done);
 } else {
     $test = "낫트루";
     mq("UPDATE rt_todo SET
@@ -57,7 +57,7 @@ if($all_done){
 
     // 루틴 수행 데이터(과거 내역)가 추가되어 있는지 확인 후,
     // 추가되어 있으면 이 데이터의 완료 여부(done 값)을 0으로 변경
-    done_rt($rt_id, $result['title'], $result['m_days'], $m_date, $result['m_time'], $result['memo'], $result['user_id'], $all_done);
+    done_rt($rt_id, $result['title'], $result['m_days'], $m_date, $result['m_time'], $result['alarm'], $result['on_feed'], $result['memo'], $result['user_id'], $all_done);
 }
 
 $response;

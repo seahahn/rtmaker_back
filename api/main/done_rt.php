@@ -36,7 +36,7 @@ if($done == 1 && $m_date != ""){
         // 루틴 수행 데이터(과거 내역) 추가하기
         // 루틴 수행 데이터(과거 내역)가 추가되어 있는지 확인 후,
         // 추가되어 있으면 이 데이터의 완료 여부(done 값)을 1로 변경
-        done_rt($id, $result['title'], $result['m_days'], $done_date, $result['m_time'], $result['memo'], $result['user_id'], $done);
+        done_rt($id, $result['title'], $result['m_days'], $done_date, $result['m_time'], $result['alarm'], $result['on_feed'], $result['memo'], $result['user_id'], $done);
 
         // 루틴에 포함된 행동 전체 완료 처리
         done_actions($id, $done_date, $done);
@@ -54,7 +54,7 @@ if($done == 1 && $m_date != ""){
 
     // 루틴 수행 데이터(과거 내역)가 추가되어 있는지 확인 후,
     // 추가되어 있으면 이 데이터의 완료 여부(done 값)을 0으로 변경
-    done_rt($id, $result['title'], $result['m_days'], $done_date, $result['m_time'], $result['memo'], $result['user_id'], $done);
+    done_rt($id, $result['title'], $result['m_days'], $done_date, $result['m_time'], $result['alarm'], $result['on_feed'], $result['memo'], $result['user_id'], $done);
 
     // 루틴에 포함된 행동을 미완료 상태로 바꾸기
     done_actions($id, $done_date, $done);
