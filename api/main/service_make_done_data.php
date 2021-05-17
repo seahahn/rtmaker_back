@@ -14,9 +14,6 @@ $today = date("Y-m-d", time()); // 오늘 날짜 구하기
 $week_string = array("일", "월", "화", "수", "목", "금", "토");
 $dayoftoday = $week_string[date('w', strtotime($today))]; // 오늘 요일 구하기
 
-// echo $today;
-// echo $dayoftoday;
-
 $sql = "SELECT * FROM rt_todo WHERE m_days LIKE '%$dayoftoday%'"; // 0시 기준 당일의 요일 이름 문자열을 m_days에 포함한 루틴 데이터 불러오기
 $result = mq($sql);
 
