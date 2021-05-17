@@ -16,20 +16,15 @@ function done_rt($rt_id, $title, $m_days, $m_date, $m_time, $memo, $user_id, $do
         user_id = '$user_id',
         done = '$done'
         ");
+
+        echo "추가함";
     } else {
+        echo "변경함";
         mq("UPDATE rt_done SET
         done = '$done'
         WHERE rt_id = '$rt_id' AND m_date = '$m_date'
         ");
     }
-
-    $timezone = 'Asia/Seoul'; // 시간대를 서울로 설정
-    date_default_timezone_set($timezone);
-    $today = date("Y-m-d", time()); // 오늘 날짜 구하기
-    $week_string = array("일", "월", "화", "수", "목", "금", "토");
-    $dayoftoday = $week_string[date('w', strtotime($today))]; // 오늘 요일 구하기
-    echo $today;
-    echo $dayoftoday;
 }
 
 function done_todo($title, $m_type, $m_days, $m_date, $m_time, $alarm, $on_feed, $memo, $user_id) {
