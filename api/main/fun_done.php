@@ -19,11 +19,11 @@ function done_rt($rt_id, $title, $m_days, $m_date, $m_time, $alarm, $on_feed, $m
         done = '$done'
         ");
 
-        if($insert) {
-            echo "추가됨";
-        } else {
-            echo "추가 안됨";
-        }
+        // if($insert) {
+        //     echo "추가됨";
+        // } else {
+        //     echo "추가 안됨";
+        // }
     } else {
         mq("UPDATE rt_done SET
         done = '$done'
