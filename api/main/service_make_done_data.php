@@ -39,7 +39,7 @@ $result = mq($sql);
 // $sql = "SELECT * FROM rt_todo WHERE id='$id'";
 // $result = mysqli_fetch_assoc(mq($sql));
 
-done_rt($id, $result['title'], $result['m_days'], $result['m_date'], $result['m_time'], $result['memo'], $result['user_id'], 0);
-done_actions($id, $result['m_date'], 0);
+done_rt($result['id'], $result['title'], $result['m_days'], $result['m_date'], $result['m_time'], $result['memo'], $result['user_id'], 0);
+done_actions($result['id'], $result['m_date'], 0);
 
 ?>
