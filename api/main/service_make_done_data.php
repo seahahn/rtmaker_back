@@ -3,7 +3,7 @@
  * 0시 기준으로 당일에 수행 예정인 루틴 및 루틴 내 행동에 대한 수행(done) 데이터를 생성
  * 이는 사용자의 폰이 장기간 꺼져 있는 경우에도 루틴 수행에 대한 과거 내역을 생성 및 누적하기 위함임
 */
-include_once "util/db_con.php";
+include_once "/util/db_con.php";
 include_once "fun_done.php"; // 루틴 및 할 일 완료 처리를 위한 메소드를 모아둔 파일
 
 // 오늘 날짜를 통해 오늘의 요일 구하기
