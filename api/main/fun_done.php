@@ -6,7 +6,7 @@ function done_rt($rt_id, $title, $m_days, $m_date, $m_time, $memo, $user_id, $do
     $check = mq("SELECT * FROM rt_done WHERE rt_id = '$rt_id' AND m_date = '$m_date'");
     $count = mysqli_num_rows($check);
     if($count == 0) {
-        mq("INSERT rt_done SET
+        $insert = mq("INSERT rt_done SET
         title = '$title',
         m_days = '$m_days',
         m_date = '$m_date',
@@ -17,9 +17,8 @@ function done_rt($rt_id, $title, $m_days, $m_date, $m_time, $memo, $user_id, $do
         done = '$done'
         ");
 
-        echo "추가함";
+        echo "$insert";
     } else {
-        echo "변경함";
         mq("UPDATE rt_done SET
         done = '$done'
         WHERE rt_id = '$rt_id' AND m_date = '$m_date'
