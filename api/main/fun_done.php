@@ -11,6 +11,8 @@ function done_rt($rt_id, $title, $m_days, $m_date, $m_time, $alarm, $on_feed, $m
         m_days = '$m_days',
         m_date = '$m_date',
         m_time = '$m_time',
+        alarm = '$alarm',
+        on_feed = '$on_feed',
         memo = '$memo',
         rt_id = '$rt_id',
         user_id = '$user_id',
