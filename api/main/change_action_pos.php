@@ -1,6 +1,7 @@
 <?php
 include_once $_SERVER["DOCUMENT_ROOT"]."/util/db_con.php";
 
+$m_date = $_POST['m_date'];
 $id_moved = $_POST['id_moved'];
 $id_pushed = $_POST['id_pushed'];
 $pos_moved = $_POST['pos_moved'];
@@ -12,10 +13,18 @@ if(isset($id_moved) && isset($id_pushed)) {
     pos = '$pos_moved'
     WHERE id = '$id_moved'
     ");
+    $mq = mq("UPDATE action_done SET
+    pos = '$pos_moved'
+    WHERE action_id = '$id_moved' AND m_date = '$m_date'
+    ");
 
     $mq = mq("UPDATE action SET
     pos = '$pos_pushed'
     WHERE id = '$id_pushed'
+    ");
+    $mq = mq("UPDATE action_done SET
+    pos = '$pos_pushed'
+    WHERE action_id = '$id_pushed' AND m_date = '$m_date'
     ");
 } else {
     $mq = false;
