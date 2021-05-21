@@ -7,21 +7,24 @@ $id_pushed = $_POST['id_pushed'];
 $pos_moved = $_POST['pos_moved'];
 $pos_pushed = $_POST['pos_pushed'];
 
-// 들어온 값 있을 경우 DB에 사용자 가입 정보 저장
 if(isset($id_moved) && isset($id_pushed)) {
+    // 이동시킨 루틴 내 행동 데이터를 DB에 반영시킴
     $mq = mq("UPDATE action SET
     pos = '$pos_moved'
     WHERE id = '$id_moved'
     ");
+    // 오늘 날짜에 추가된 해당 루틴 내 행동의 수행 내역에도 순서 데이터를 반영시킴
     $mq = mq("UPDATE action_done SET
     pos = '$pos_moved'
     WHERE action_id = '$id_moved' AND m_date = '$m_date'
     ");
 
+    // 밀려서 이동된 루틴 내 행동 데이터를 DB에 반영시킴
     $mq = mq("UPDATE action SET
     pos = '$pos_pushed'
     WHERE id = '$id_pushed'
     ");
+    // 오늘 날짜에 추가된 해당 루틴 내 행동의 수행 내역에도 순서 데이터를 반영시킴
     $mq = mq("UPDATE action_done SET
     pos = '$pos_pushed'
     WHERE action_id = '$id_pushed' AND m_date = '$m_date'
