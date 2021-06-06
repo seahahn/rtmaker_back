@@ -5,7 +5,7 @@ $id = $_POST['id'];
 $title = $_POST['title'];
 $tags = $_POST['tags'];
 $head_limit = $_POST['head_limit'];
-$_POST['is_locked'] == "true" ? $is_locked = 1 : $is_locked = 0;
+$_POST['on_public'] == "true" ? $on_public = 1 : $on_public = 0;
 $memo = $_POST['memo'];
 
 // 들어온 값 있을 경우 DB에 사용자 가입 정보 저장
@@ -14,7 +14,7 @@ if(isset($id)) {
     title = '$title',
     tags = '$tags',
     head_limit = '$head_limit',
-    is_locked = '$is_locked',
+    on_public = '$on_public',
     memo = '$memo'
     WHERE id = '$id'
     ");
