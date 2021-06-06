@@ -103,8 +103,4 @@ function done_actions($rt_id, $m_date, $done) {
         }
     }
 }
-
-function set_rt_done_false() {
-
-}
 ?>
