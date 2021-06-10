@@ -23,12 +23,12 @@ $response;
 if($mq) {
     $response = [
         'result'   => true,
-        'msg' => "작성되었습니다."
+        'msg' => "수정되었습니다."
     ];
 } else {
     $response = [
         'result'   => false,
-        'msg' => "작성에 실패했습니다."
+        'msg' => "수정에 실패했습니다."
     ];
 }
 
