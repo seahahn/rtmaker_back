@@ -4,10 +4,10 @@
  */
 include_once $_SERVER["DOCUMENT_ROOT"]."/util/db_con.php";
 
-$id = $_GET['id'];
-$sql = "SELECT * FROM user WHERE id='$id'";
+$user_id = $_GET['user_id'];
+$sql = "SELECT nick, photo FROM user WHERE id='$user_id'";
 $result = mq($sql);
-$ret = mysqli_fetch_array($result);
+$ret = mysqli_fetch_assoc($result);
 
 echo json_encode($ret);
 ?>
