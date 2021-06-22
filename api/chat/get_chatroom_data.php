@@ -37,10 +37,11 @@ if($exist == 0) {
 }
 // 채팅방 데이터 보내기
 $result = $mq->fetch_assoc();
+$result['is_groupchat'] == 1 ? $is_groupchat = true : $is_groupchat = false;
 $data = [
         'id'   => $result['id'],
-        'isGroupchat'   => $result['is_groupchat'],
-        'userId' => $result['host_id'],
+        'isGroupchat'   => $is_groupchat,
+        'hostId' => $result['host_id'],
         'audienceId' => $result['audience_id'],
         'memberList'   => $result['member_list'],
         'createdAt' => $result['created_at']
