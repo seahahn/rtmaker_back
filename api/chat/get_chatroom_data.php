@@ -28,8 +28,7 @@ if($exist == 0) {
     $mq = mq("INSERT chat_room SET
     is_groupchat = '$is_groupchat',
     audience_id = '$audience_id',
-    host_id = '$host_id',
-    member_list = '$host_id'
+    host_id = '$host_id'
     ");
 
     $mq = mq("SELECT * FROM chat_room 
@@ -43,7 +42,6 @@ $data = [
         'isGroupchat'   => $is_groupchat,
         'hostId' => $result['host_id'],
         'audienceId' => $result['audience_id'],
-        'memberList'   => $result['member_list'],
         'createdAt' => $result['created_at']
         ];
 

@@ -18,7 +18,6 @@ $data = [
         'isGroupchat'   => $is_groupchat,
         'hostId' => $result['host_id'],
         'audienceId' => $result['audience_id'],
-        'memberList'   => $result['member_list'],
         'createdAt' => $result['created_at']
         ];
 
