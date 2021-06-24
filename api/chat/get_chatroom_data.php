@@ -28,8 +28,7 @@ if($exist == 0) {
     $mq = mq("INSERT chat_room SET
     is_groupchat = '$is_groupchat',
     audience_id = '$audience_id',
-    host_id = '$host_id',
-    member_list = '$host_id'
+    host_id = '$host_id'
     ");
 
     $mq = mq("SELECT * FROM chat_room 
@@ -37,12 +36,12 @@ if($exist == 0) {
 }
 // 채팅방 데이터 보내기
 $result = $mq->fetch_assoc();
+$result['is_groupchat'] == 1 ? $is_groupchat = true : $is_groupchat = false;
 $data = [
         'id'   => $result['id'],
-        'isGroupchat'   => $result['is_groupchat'],
-        'userId' => $result['host_id'],
+        'isGroupchat'   => $is_groupchat,
+        'hostId' => $result['host_id'],
         'audienceId' => $result['audience_id'],
-        'memberList'   => $result['member_list'],
         'createdAt' => $result['created_at']
         ];
 

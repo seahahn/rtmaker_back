@@ -5,7 +5,7 @@
 include_once $_SERVER["DOCUMENT_ROOT"]."/util/db_con.php";
 
 $user_id = $_GET['user_id'];
-$sql = "SELECT nick, photo FROM user WHERE id='$user_id'";
+$sql = "SELECT id, nick, photo FROM user WHERE id='$user_id'";
 $result = mq($sql);
 $ret = mysqli_fetch_assoc($result);
 
