@@ -71,8 +71,7 @@ if($is_groupchat == 0) {
         } else {
                 // 존재하면 기존 데이터를 채팅방에 참여중인 것으로 수정
                 $mq = mq("UPDATE chat_user SET
-                is_in = 1,
-                token = '$ret[token]'
+                is_in = 1
                 WHERE room_id = '$result[id]' AND user_id = '$audience_id'");
         }
 }
