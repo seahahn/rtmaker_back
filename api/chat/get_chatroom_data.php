@@ -57,15 +57,17 @@ if($is_groupchat == 0) {
         $exist = mysqli_num_rows($mq);
         
         if($exist == 0) {
-                $mq = mq("SELECT token FROM user WHERE id='$id'");
+                $mq = mq("SELECT token FROM user WHERE id = '$audience_id'");
                 $ret = mysqli_fetch_array($mq);
 
-                $mq = mq("INSERT chat_user SET
-                room_id = '$result[id]',
-                user_id = '$audience_id',
-                is_in = 1,
-                token = '$ret[token]'
-                ");
+                if($ret) {
+                        $mq = mq("INSERT chat_user SET
+                        room_id = '$result[id]',
+                        user_id = '$audience_id',
+                        is_in = 1,
+                        token = '$ret[token]'
+                        ");
+                }
         } else {
                 // 존재하면 기존 데이터를 채팅방에 참여중인 것으로 수정
                 $mq = mq("UPDATE chat_user SET
