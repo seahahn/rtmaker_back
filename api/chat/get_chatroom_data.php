@@ -28,14 +28,14 @@ if($exist == 0 && $is_groupchat == 0) {
 
 // 채팅방이 없으면 채팅방 데이터를 생성한 후에 이 데이터를 그대로 가져옴
 if($exist == 0) {
-    $mq = mq("INSERT chat_room SET
-    is_groupchat = '$is_groupchat',
-    audience_id = '$audience_id',
-    host_id = '$host_id'
-    ");
+        $mq = mq("INSERT chat_room SET
+        is_groupchat = '$is_groupchat',
+        audience_id = '$audience_id',
+        host_id = '$host_id'
+        ");
 
-    $mq = mq("SELECT * FROM chat_room 
-            WHERE is_groupchat='$is_groupchat' AND host_id='$host_id' AND audience_id='$audience_id'");
+        $mq = mq("SELECT * FROM chat_room 
+        WHERE is_groupchat='$is_groupchat' AND host_id='$host_id' AND audience_id='$audience_id'");
 }
 // 채팅방 데이터 보내기
 $result = $mq->fetch_assoc();
@@ -49,5 +49,31 @@ $data = [
         ];
 
 echo json_encode($data);
+
+
+// 1:1 채팅인 경우에는 채팅방 생성 후 채팅 상대방도 채팅방에 참여하는 것으로 데이터를 생성 또는 수정함
+if($exist == 0 && $is_groupchat == 0) {
+        $mq = mq("SELECT * FROM chat_user WHERE room_id='$room_id' AND user_id = '$audience_id'");
+        $exist = mysqli_num_rows($mq);
+        
+        if($exist == 0) {
+                $mq = mq("SELECT token FROM user WHERE id='$id'");
+                $ret = mysqli_fetch_array($mq);
+
+                $mq = mq("INSERT chat_user SET
+                room_id = '$result[id]',
+                user_id = '$audience_id',
+                is_in = 1,
+                token = '$ret[token]'
+                ");
+        } else {
+                // 존재하면 기존 데이터를 채팅방에 참여중인 것으로 수정
+                $mq = mq("UPDATE chat_user SET
+                is_in = 1,
+                token = '$ret[token]'
+                WHERE room_id = '$result[id]' AND user_id = '$audience_id'");
+        }
+}
+
 
 ?>
