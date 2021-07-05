@@ -6,7 +6,7 @@ $token = $_POST['token'];
 
 mq("UPDATE user SET
             token = '$token'
-            WHERE id='$id'
+            WHERE id = '$id'
             ");
 
 $response = [
