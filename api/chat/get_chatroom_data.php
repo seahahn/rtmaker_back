@@ -53,7 +53,7 @@ echo json_encode($data);
 
 // 1:1 채팅인 경우에는 채팅방 생성 후 채팅 상대방도 채팅방에 참여하는 것으로 데이터를 생성 또는 수정함
 if($is_groupchat == 0) {
-        $mq = mq("SELECT * FROM chat_user WHERE room_id='$room_id' AND user_id = '$audience_id'");
+        $mq = mq("SELECT * FROM chat_user WHERE room_id='$result[id]' AND user_id = '$audience_id'");
         $exist = mysqli_num_rows($mq);
         
         if($exist == 0) {

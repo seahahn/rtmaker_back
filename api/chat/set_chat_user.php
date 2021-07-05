@@ -23,15 +23,14 @@ if($exist == 0) {
 } else {
     // 존재하면 기존 데이터를 채팅방에 참여중인 것으로 수정
     $mq = mq("UPDATE chat_user SET
-    is_in = '$is_in',
-    token = '$token'
+    is_in = '$is_in'
     WHERE room_id = '$room_id' AND user_id = '$user_id'");
 }
 
 // 사용자의 토큰값 갱신하기(재설치 등의 이유로 변동되었을 경우 대비)
-mq("UPDATE chat_user SET
-    token = '$token'
-    WHERE user_id = '$user_id'");
+// mq("UPDATE chat_user SET
+//     token = '$token'
+//     WHERE user_id = '$user_id'");
 
 $response;
 
