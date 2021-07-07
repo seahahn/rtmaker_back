@@ -33,7 +33,7 @@ while($rt = $mq->fetch_assoc()) {
     $result = mysqli_fetch_array($user);
 
     $token = $result['token']; 
-    $title = $rt['title']." 수행 시각 알람";
+    $title = $rt['title'];
     $body = $rt['title']." 수행할 시각입니다!";
     $notification = array(
         'type' => 4,
