@@ -2,6 +2,7 @@
 include_once $_SERVER["DOCUMENT_ROOT"]."/util/db_con.php";
 
 $feed_id = $_POST['feed_id'];
+$feed_writer_id = $_POST['feed_writer_id'];
 $writer_id = $_POST['writer_id'];
 $_POST['is_liked'] == "true" ? $is_liked = 1 : $is_liked = 0;
 
@@ -32,14 +33,24 @@ if(isset($feed_id)) {
 $response;
 
 if($mq) {
+    $mq_feed = mq("SELECT * FROM sns_newsfeed WHERE id='$id'");
+    $ret_feed = mysqli_fetch_array($mq_feed);
+    $feed_content = $ret_feed['content'];
+    $images = $ret_feed['images'];
+
+    $mq_feed_writer = mq("SELECT token FROM user WHERE id = '$feed_writer_id'");
+    $ret_feed_writer = mysqli_fetch_array($mq_feed_writer);
+    $feed_writer_token = $ret_feed_writer['token'];
+
     $response = [
         'result'   => true,
-        'msg' => "작성되었습니다."
+        'token' => $feed_writer_token,
+        'content' => $feed_content,
+        'images' => $images
     ];
 } else {
     $response = [
-        'result'   => false,
-        'msg' => "작성에 실패했습니다."
+        'result'   => false
     ];
 }
 
