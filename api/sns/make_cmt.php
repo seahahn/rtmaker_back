@@ -41,7 +41,7 @@ if($mq) {
 
     if($mq_feed_writer) {
         if($sub_cmt) { // 대댓글인 경우 대댓글이 달린 댓글 작성자와 피드 작성자 둘 모두에게 알림을 보냄
-            $mq_cmt_writer_id = mq("SELECT writer_id FROM feed_comment WHERE main_cmt = '$main_cmt'");
+            $mq_cmt_writer_id = mq("SELECT writer_id FROM feed_comment WHERE id = '$main_cmt'");
             $ret_cmt_writer_id = mysqli_fetch_array($mq_cmt_writer_id);
             $cmt_writer_id = $ret_cmt_writer_id['writer_id'];
 
