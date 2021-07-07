@@ -2,8 +2,8 @@
 include_once $_SERVER["DOCUMENT_ROOT"]."/util/db_con.php";
 
 $writer_id = $_POST['writer_id'];
-$feed_writer_id = $_POST['feed_writer_id'];
 $feed_id = $_POST['feed_id'];
+$feed_writer_id = $_POST['feed_writer_id'];
 $content = $_POST['content'];
 $image = $_POST['image'];
 $_POST['is_sub'] == "true" ? $is_sub = 1 : $is_sub = 0;
@@ -39,7 +39,7 @@ if($mq) {
 
     $is_sub == 1 ? $sub_cmt = true : $sub_cmt = false;
 
-    if($mq_feed && $mq_feed_writer) {
+    if($mq_feed_writer) {
         if($sub_cmt) { // 대댓글인 경우 대댓글이 달린 댓글 작성자와 피드 작성자 둘 모두에게 알림을 보냄
             $mq_cmt_writer_id = mq("SELECT writer_id FROM feed_comment WHERE main_cmt = '$main_cmt'");
             $ret_cmt_writer_id = mysqli_fetch_array($mq_cmt_writer_id);
