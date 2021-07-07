@@ -19,12 +19,14 @@ if(isset($feed_id)) {
         writer_id = '$writer_id',
         is_liked = '$is_liked'
         ");
+        $already_exist = false;
     } else {
         // 좋아요 정보 수정
         $mq = mq("UPDATE feed_like SET
         is_liked = '$is_liked'
         WHERE feed_id = '$feed_id' AND writer_id = '$writer_id'
         ");
+        $already_exist = true;
     }
 } else {
     $mq = false;
@@ -45,6 +47,7 @@ if($mq) {
     if($mq_feed && $mq_feed_writer) {
         $response = [
             'result'   => true,
+            'alreadyExist' => $already_exist,
             'token' => $feed_writer_token,
             'content' => $feed_content,
             'images' => $images
