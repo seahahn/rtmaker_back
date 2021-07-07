@@ -1,5 +1,5 @@
 <?php 
-include_once $_SERVER["DOCUMENT_ROOT"]."/util/db_con.php";
+include_once "/htdocs/util/db_con.php";
 
 $url = "https://fcm.googleapis.com/fcm/send"; 
 $serverKey = 'AAAAxBTtrNk:APA91bHulhtjaswBGKWngPPDh4OIs1hvZSNpRGjqL8_zPPRu7wm6qZPDAzIpbvTKoG7QXcyNP1htVsCBvf0wFBwGbfHnwdqR4isHAgoj8O-OvFQC2Bjhzc8J3_7RcVU4MlqtmfeXTJsC';
