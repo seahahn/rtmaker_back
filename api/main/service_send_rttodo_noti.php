@@ -60,7 +60,8 @@ while($rt = $mq->fetch_assoc()) {
     if ($response === FALSE) { 
         die('FCM Send Error: ' . curl_error($ch)); 
     }
+    
+    curl_close($ch);
 }
 
-curl_close($ch);
 ?>
