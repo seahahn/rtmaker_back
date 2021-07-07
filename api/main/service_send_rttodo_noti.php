@@ -29,7 +29,7 @@ while($rt = $mq->fetch_assoc()) {
         'createdAt' => $rt['created_at']
     ];
 
-    $user = mq("SELECT token FROM user WHERE id = '$rt[id]'");
+    $user = mq("SELECT token FROM user WHERE id = '$rt[user_id]'");
     $result = mysqli_fetch_array($user);
 
     $token = $result['token']; 
