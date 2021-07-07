@@ -12,6 +12,7 @@ while($noti = $result->fetch_assoc()) {
     $data = [
         'id'   => $noti['id'],
         'receiverId'   => $noti['receiver_id'],
+        'senderId'   => $noti['sender_id'],
         'type'   => $noti['type'],
         'title' => $noti['title'],
         'body' => $noti['body'],
