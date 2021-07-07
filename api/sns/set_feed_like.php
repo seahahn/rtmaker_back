@@ -42,12 +42,14 @@ if($mq) {
     $ret_feed_writer = mysqli_fetch_array($mq_feed_writer);
     $feed_writer_token = $ret_feed_writer['token'];
 
-    $response = [
-        'result'   => true,
-        'token' => $feed_writer_token,
-        'content' => $feed_content,
-        'images' => $images
-    ];
+    if($mq_feed && $mq_feed_writer) {
+        $response = [
+            'result'   => true,
+            'token' => $feed_writer_token,
+            'content' => $feed_content,
+            'images' => $images
+        ];
+    }
 } else {
     $response = [
         'result'   => false
