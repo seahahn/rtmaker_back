@@ -33,7 +33,7 @@ if(isset($feed_id)) {
 $response;
 
 if($mq) {
-    $mq_feed = mq("SELECT * FROM sns_newsfeed WHERE id='$id'");
+    $mq_feed = mq("SELECT * FROM sns_newsfeed WHERE id='$feed_id'");
     $ret_feed = mysqli_fetch_array($mq_feed);
     $feed_content = $ret_feed['content'];
     $images = $ret_feed['images'];
