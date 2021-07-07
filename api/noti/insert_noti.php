@@ -2,6 +2,7 @@
 include_once $_SERVER["DOCUMENT_ROOT"]."/util/db_con.php";
 
 $receiver_id = $_POST['receiver_id'];
+$sender_id = $_POST['sender_id'];
 $type = $_POST['type'];
 $title = $_POST['title'];
 $body = $_POST['body'];
@@ -12,6 +13,7 @@ if(isset($receiver_id)) {
     // 피드 정보 저장
     $mq = mq("INSERT noti_item SET
     receiver_id = '$receiver_id',
+    sender_id = '$sender_id',
     type = '$type',
     title = '$title',
     body = '$body',
