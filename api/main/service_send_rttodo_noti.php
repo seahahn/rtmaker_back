@@ -35,14 +35,14 @@ while($rt = $mq->fetch_assoc()) {
     $token = $result['token']; 
     $title = $rt['title'];
     $body = $rt['title']." 수행할 시각입니다!";
-    $notification = array(
+    $data = array(
         'type' => 4,
         'title' =>$title,
         'body' => $body,
         'target' => $rt['id']);
     $arrayToSend = array(
         'to' => $token, 
-        'notification' => $notification,
+        'data' => $data,
         'priority'=>'high');
     $json = json_encode($arrayToSend); 
 
