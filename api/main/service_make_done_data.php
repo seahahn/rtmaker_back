@@ -17,7 +17,7 @@ $yesterday = date("Y-m-d", strtotime("-1 day")); // 어제 날짜 구하기
 $dayoftoday = $week_string[date('w', strtotime($today))]; // 오늘 요일 구하기
 $dayofyesterday = $week_string[date('w', strtotime($yesterday))]; // 어제 요일 구하기
 
-$sql = "SELECT * FROM rt_todo WHERE m_days LIKE '%$dayoftoday%'"; // 0시 기준 당일의 요일 이름 문자열을 m_days에 포함한 루틴 데이터 불러오기
+$sql = "SELECT * FROM rt_todo WHERE m_type = 'rt' AND m_days LIKE '%$dayoftoday%'"; // 0시 기준 당일의 요일 이름 문자열을 m_days에 포함한 루틴 데이터 불러오기
 $result = mq($sql);
 
 // 불러온 루틴 데이터 각각에 대하여 수행 데이터를 생성함
