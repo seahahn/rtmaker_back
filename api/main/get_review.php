@@ -8,9 +8,10 @@ $sql = "SELECT * FROM review WHERE m_date='$m_date' AND user_id='$user_id'";
 $result = mq($sql);
 
 while($review = $result->fetch_assoc()) {
+    $review['on_public'] == 1 ? $on_public = true : $on_public = false;
     $data = [
         'content'   => $review['content'],
-        'on_public' => $review['on_public']
+        'on_public' => $on_public
     ];
 }
 
