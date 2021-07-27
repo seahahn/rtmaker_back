@@ -30,6 +30,7 @@ while($feed = $result->fetch_assoc()) {
         'images' => $feed['images'],
         'groupId'   => $feed['group_id'],
         'challengeId' => $feed['challenge_id'],
+        'warningCount' => $feed['warning_count'],
         'createdAt' => $feed['created_at'],
         'likeCount' => $like_count,
         'commentCount' => $comment_count,
