@@ -5,10 +5,6 @@ $id = $_POST["id"];
 $subject = $_POST["subject"];
 $content = $_POST["content"];
 
-// $sql = "SELECT * FROM user WHERE id='$id'";
-// $result = mq($sql);
-// $user = mysqli_fetch_array($result);
-
 $change = mq("UPDATE user SET
             $subject = '$content'
             WHERE id = '$id'
