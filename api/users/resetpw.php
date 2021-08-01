@@ -201,6 +201,7 @@ try {
     echo "CA 인증 설정";
 
     // 메일 전송
+    echo "메일 전송 전";
     $mail -> send();
     echo "메일 전송";
 
