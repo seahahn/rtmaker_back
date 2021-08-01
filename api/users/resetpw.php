@@ -16,14 +16,14 @@ $hash = rand(1000,9999); // 이메일 인증 위한 해쉬값(4자리 숫자) �
 $regEmail = '/^[a-zA-Z]{1}[a-zA-Z0-9.\-_]+@[a-z0-9]{1}[a-z0-9\-]+[a-z0-9]{1}\.(([a-z]{1}[a-z.]+[a-z]{1})|([a-z]+))$/';
 
 
-if($email != ""){    
+if($email != ""){
     $sql = "SELECT * FROM user WHERE email='$email'";
     $result = mq($sql);
     $num = mysqli_num_rows($result);
     $user = mysqli_fetch_array($result);
     $nick = $user['nick'];
     $inway = $user['inway'];
-    
+
     if(!preg_match($regEmail, $email)) {
         $ret['msg'] = "올바르지 않은 이메일입니다.";
         $ret['result'] = false;
