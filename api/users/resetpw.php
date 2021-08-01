@@ -2,13 +2,12 @@
 include_once $_SERVER["DOCUMENT_ROOT"]."/util/db_con.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-// require $_SERVER["DOCUMENT_ROOT"]."/vendor/PHPMailer/PHPMailer/src/PHPMailer.php";
-// require $_SERVER["DOCUMENT_ROOT"]."/vendor/PHPMailer/PHPMailer/src/SMTP.php";
-// require $_SERVER["DOCUMENT_ROOT"]."/vendor/PHPMailer/PHPMailer/src/Exception.php";
-require $_SERVER["DOCUMENT_ROOT"].'/vendor/autoload.php';
+require $_SERVER["DOCUMENT_ROOT"]."/vendor/PHPMailer/PHPMailer/src/PHPMailer.php";
+require $_SERVER["DOCUMENT_ROOT"]."/vendor/PHPMailer/PHPMailer/src/SMTP.php";
+require $_SERVER["DOCUMENT_ROOT"]."/vendor/PHPMailer/PHPMailer/src/Exception.php";
+// require $_SERVER["DOCUMENT_ROOT"].'/vendor/autoload.php';
 
 // $email = $_POST['email'];
 $hash = rand(1000,9999); // 이메일 인증 위한 해쉬값(4자리 숫자) 생성
