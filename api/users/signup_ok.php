@@ -4,10 +4,10 @@ include_once $_SERVER["DOCUMENT_ROOT"]."/util/db_con.php";
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require $_SERVER["DOCUMENT_ROOT"]."/vendor/PHPMailer/PHPMailer/src/PHPMailer.php";
-require $_SERVER["DOCUMENT_ROOT"]."/vendor/PHPMailer/PHPMailer/src/SMTP.php";
-require $_SERVER["DOCUMENT_ROOT"]."/vendor/PHPMailer/PHPMailer/src/Exception.php";
-// require $_SERVER["DOCUMENT_ROOT"].'/vendor/autoload.php';
+// require $_SERVER["DOCUMENT_ROOT"]."/vendor/PHPMailer/PHPMailer/src/PHPMailer.php";
+// require $_SERVER["DOCUMENT_ROOT"]."/vendor/PHPMailer/PHPMailer/src/SMTP.php";
+// require $_SERVER["DOCUMENT_ROOT"]."/vendor/PHPMailer/PHPMailer/src/Exception.php";
+require $_SERVER["DOCUMENT_ROOT"].'/vendor/autoload.php';
 
 $email = $_POST['email'];
 $pw = password_hash($_POST['pw'], PASSWORD_DEFAULT);
@@ -30,11 +30,12 @@ if($inway == "etc") {
         $mail -> Host = "smtp.gmail.com";                // email 보낼때 사용할 서버를 지정
         $mail -> SMTPAuth = true;                        // SMTP 인증을 사용함
         $mail -> Username = "rtmaker.noreply@gmail.com";    // 메일 계정
-        $mail -> Password = "gsdjklgzbgpybywn";                // 메일 비밀번호
+        $mail -> Password = "TeamNova123!";                // 메일 비밀번호
         // $mail -> Password = "Teamnova123!";                // 메일 비밀번호
         $mail -> SMTPSecure = "ssl";                    // SSL을 사용함
         $mail -> Port = 465;                            // email 보낼때 사용할 포트를 지정
         $mail -> CharSet = "utf-8";                        // 문자셋 인코딩
+        $mail -> Encoding = "base64";
     
         // 보내는 메일
         $mail -> setFrom("rtmaker.noreply@gmail.com", "no-reply");
