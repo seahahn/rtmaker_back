@@ -31,6 +31,7 @@ $sql_done = "SELECT * FROM action WHERE rt_id='$rt_id' AND done=1";
 $result_num = mysqli_num_rows(mq($sql)); // 전체 행동 개수
 $result_done = mysqli_num_rows(mq($sql_done)); // 완료한 행동 개수
 $all_done = $result_num == $result_done; // 전체 완료 여부
+$all_done == true ? $done = 1 : $done = 0;
 
 $sql_rt = "SELECT * FROM rt_todo WHERE id='$rt_id'";
 $result = mysqli_fetch_assoc(mq($sql_rt));
@@ -40,24 +41,24 @@ if($all_done){
     $test = "트루";
     mq("UPDATE rt_todo SET
     m_date = '$m_date',
-    done = '$all_done'
+    done = '$done'
     WHERE id = '$rt_id'
     ");
 
     // 루틴 수행 데이터(과거 내역)가 추가되어 있는지 확인 후,
     // 추가되어 있으면 이 데이터의 완료 여부(done 값)을 1로 변경
-    done_rt($rt_id, $result['title'], $result['m_days'], $m_date, $result['m_time'], $result['alarm'], $result['on_feed'], $result['memo'], $result['user_id'], $all_done);
+    done_rt($rt_id, $result['title'], $result['m_days'], $m_date, $result['m_time'], $result['alarm'], $result['on_feed'], $result['memo'], $result['user_id'], $done);
 } else {
     $test = "낫트루";
     mq("UPDATE rt_todo SET
     m_date = '$m_date',
-    done = '$all_done'
+    done = '$done'
     WHERE id = '$rt_id'
     ");
 
     // 루틴 수행 데이터(과거 내역)가 추가되어 있는지 확인 후,
     // 추가되어 있으면 이 데이터의 완료 여부(done 값)을 0으로 변경
-    done_rt($rt_id, $result['title'], $result['m_days'], $m_date, $result['m_time'], $result['alarm'], $result['on_feed'], $result['memo'], $result['user_id'], $all_done);
+    done_rt($rt_id, $result['title'], $result['m_days'], $m_date, $result['m_time'], $result['alarm'], $result['on_feed'], $result['memo'], $result['user_id'], $done);
 }
 
 $response;
