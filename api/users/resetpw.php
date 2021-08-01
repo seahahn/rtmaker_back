@@ -2,6 +2,7 @@
 include_once $_SERVER["DOCUMENT_ROOT"]."/util/db_con.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 // require $_SERVER["DOCUMENT_ROOT"]."/vendor/PHPMailer/PHPMailer/src/PHPMailer.php";
