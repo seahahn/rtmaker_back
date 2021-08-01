@@ -128,7 +128,7 @@ try {
             <div style="margin-bottom:20px;text-align:center"></div>
             </div>
 
-            <!-- 버튼 -->
+            <!-- 인증 번호 -->
             <div style="margin-bottom:20px;text-align:center">
             <u></u><a style="border: 1px #11e034 solid;border-radius:30px;display:inline-block;font-size:14px;font-weight:bold;line-:1;padding:12px 24px;text-align:center;text-decoration:none!important;color:#ffffff!important;background-color: #1bbd36;font-family:sans-serif;" rel="noreferrer noopener">인증번호 : '.$hash.'</a><u></u>
             </div>
