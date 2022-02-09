@@ -1,10 +1,10 @@
-<?php 
+<?php
 include_once "/htdocs/util/db_con.php";
 
-$url = "https://fcm.googleapis.com/fcm/send"; 
-$serverKey = 'AAAAxBTtrNk:APA91bHulhtjaswBGKWngPPDh4OIs1hvZSNpRGjqL8_zPPRu7wm6qZPDAzIpbvTKoG7QXcyNP1htVsCBvf0wFBwGbfHnwdqR4isHAgoj8O-OvFQC2Bjhzc8J3_7RcVU4MlqtmfeXTJsC';
-$headers = array(); 
-$headers[] = 'Content-Type: application/json'; 
+$url = "https://fcm.googleapis.com/fcm/send";
+$serverKey = $_SERVER['FCM_KEY'];
+$headers = array();
+$headers[] = 'Content-Type: application/json';
 $headers[] = 'Authorization: key='.$serverKey;
 
 $date = date("Y-m-d"); // 현재 날짜
@@ -32,7 +32,7 @@ while($rt = $mq->fetch_assoc()) {
     $user = mq("SELECT token FROM user WHERE id = '$rt[user_id]'");
     $result = mysqli_fetch_array($user);
 
-    $token = $result['token']; 
+    $token = $result['token'];
     $title = $rt['title'];
     $body = $rt['title']." 수행할 시각입니다!";
     $data = array(
@@ -41,26 +41,26 @@ while($rt = $mq->fetch_assoc()) {
         'body' => $body,
         'target' => $rt['id']);
     $arrayToSend = array(
-        'to' => $token, 
+        'to' => $token,
         'data' => $data,
         'priority'=>'high');
-    $json = json_encode($arrayToSend); 
+    $json = json_encode($arrayToSend);
 
 
-    $ch = curl_init(); 
-    curl_setopt($ch, CURLOPT_URL, $url); 
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"POST"); 
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $json); 
-    curl_setopt($ch, CURLOPT_HTTPHEADER,$headers); 
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"POST");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+    curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
 
-    //Send the request 
-    $response = curl_exec($ch); 
+    //Send the request
+    $response = curl_exec($ch);
 
-    //Close request 
-    if ($response === FALSE) { 
-        die('FCM Send Error: ' . curl_error($ch)); 
+    //Close request
+    if ($response === FALSE) {
+        die('FCM Send Error: ' . curl_error($ch));
     }
-    
+
     curl_close($ch);
 }
 
