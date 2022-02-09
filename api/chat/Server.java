@@ -1,8 +1,13 @@
-package api.chat;
+package SocketServer;
 
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.*;
 import java.util.Vector;
 
 public class Server {
@@ -30,14 +35,21 @@ public class Server {
     }
     public void makeServer(int port) throws IOException {
         serverSocket = new ServerSocket(port);
+        System.out.println("서버 생성 완료");
     }
     public Socket catchSocket() throws IOException{
+        System.out.println("소켓 연결 대기중");
         socket = serverSocket.accept();
 
         return socket;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        FirebaseOptions options = FirebaseOptions.builder()
+                .setCredentials(GoogleCredentials.getApplicationDefault())
+                .build();
+        FirebaseApp.initializeApp(options);
+
         new Server(33333);
     }
 }
