@@ -1,0 +1,1 @@
+web: heroku-php-apache2 | cd ./chatsocket/rtmaker_socket | ./gradlew run
