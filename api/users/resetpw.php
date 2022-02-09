@@ -63,7 +63,7 @@ try {
     $mail -> Host = "smtp.gmail.com";                // email 보낼때 사용할 서버를 지정
     $mail -> SMTPAuth = true;                        // SMTP 인증을 사용함
     $mail -> Username = "rtmaker.noreply@gmail.com";    // 메일 계정
-    $mail -> Password = "TeamNova123!";                // 메일 비밀번호
+    $mail -> Password = $_SERVER['SMTP_PW'];                // 메일 비밀번호
     $mail -> SMTPSecure = "ssl";                    // SSL을 사용함
     $mail -> Port = 465;                            // email 보낼때 사용할 포트를 지정
     $mail -> CharSet = "utf-8";                        // 문자셋 인코딩
