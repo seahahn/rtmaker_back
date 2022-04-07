@@ -1,3 +1,3 @@
 [submodule "rtmaker_socket"]
 	path = rtmaker_socket
-	url = git@github.com:seahahn/rtmaker_socket.git
+	url = https://seahahn@github.com/seahahn/rtmaker_socket.git
